@@ -1,0 +1,229 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0}</style></head><body>
+<title>Sprint 2 Billing Story</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F3F6F7; --paper:#FFFFFF; --ink:#132B35; --muted:#566A73; --line:#D5E0E3;
+  --teal:#0B7A83; --teal-soft:#D8EEF0; --amber:#B86B00; --amber-soft:#FBEBD2;
+  --red:#C23B32; --red-soft:#F8DEDB; --green:#2B7D4B; --green-soft:#DAF0E2;
+  --grey:#8FA1A8; --chip-off:#E7EDEF;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1A1F; --paper:#16252C; --ink:#E4EEF0; --muted:#9DB2BA; --line:#2A3D45;
+    --teal:#4CC3CC; --teal-soft:#16393E; --amber:#F2A93B; --amber-soft:#3A2B12;
+    --red:#F07A70; --red-soft:#3E1D1A; --green:#6CCB8F; --green-soft:#173524; --grey:#6E848C; --chip-off:#22343B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1A1F; --paper:#16252C; --ink:#E4EEF0; --muted:#9DB2BA; --line:#2A3D45;
+  --teal:#4CC3CC; --teal-soft:#16393E; --amber:#F2A93B; --amber-soft:#3A2B12;
+  --red:#F07A70; --red-soft:#3E1D1A; --green:#6CCB8F; --green-soft:#173524; --grey:#6E848C; --chip-off:#22343B;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:32px 64px;display:flex;flex-direction:column;gap:28px;}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;}
+h2{font-size:24px;font-weight:800;}
+h3{font-size:26px;font-weight:800;}
+p{margin:0;max-width:65ch;}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted);}
+.lede{color:var(--muted);font-size:17px;}
+.mono{font-family:var(--mono);font-size:14px;}
+
+/* tiny world */
+.world{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.world .col{display:flex;flex-direction:column;gap:10px;}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:14px;font-weight:700;border:1.5px solid transparent;}
+.chip.opt{background:var(--teal-soft);color:var(--teal);}
+.chip.opt.off{background:var(--chip-off);color:var(--grey);text-decoration:line-through;}
+.chip.item{background:var(--amber-soft);color:var(--amber);}
+.chip.item.off{background:var(--chip-off);color:var(--grey);}
+.chip.ok{background:var(--green-soft);color:var(--green);border-color:var(--green);}
+.chip.bad{background:var(--red-soft);color:var(--red);border-color:var(--red);}
+.chip.miss{background:transparent;color:var(--red);border:1.5px dashed var(--red);}
+.arrow{color:var(--muted);font-weight:700;}
+.ana{display:flex;flex-direction:column;gap:8px;background:var(--bg);border-radius:10px;padding:12px;}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:22px;}
+@media (max-width:680px){.card{grid-template-columns:1fr;}}
+.badge{width:110px;height:110px;border-radius:22px;display:flex;align-items:center;justify-content:center;}
+.badge svg{width:76px;height:76px;}
+.b-grey{background:var(--chip-off);} .b-teal{background:var(--teal-soft);} .b-amber{background:var(--amber-soft);} .b-green{background:var(--green-soft);} .b-red{background:var(--red-soft);}
+.body{display:flex;flex-direction:column;gap:12px;}
+.names{display:flex;flex-direction:column;gap:2px;}
+.real{font-family:var(--mono);font-size:14px;color:var(--teal);}
+.idea{font-size:18px;}
+.demo{border-left:3px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px;}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media (max-width:520px){.proscons{grid-template-columns:1fr;}}
+.pc{border-radius:10px;padding:10px 12px;font-size:15px;}
+.pc.good{background:var(--green-soft);} .pc.bad{background:var(--red-soft);}
+.pc b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
+.pc.good b{color:var(--green);} .pc.bad b{color:var(--red);}
+.status{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:15px;}
+.pill{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;}
+.pill.tested{background:var(--red-soft);color:var(--red);}
+.pill.out{background:var(--red-soft);color:var(--red);}
+.pill.next{background:var(--teal-soft);color:var(--teal);}
+.pill.ref{background:var(--chip-off);color:var(--muted);}
+.say{font-style:italic;color:var(--muted);font-size:15px;}
+
+/* cheat sheet */
+.tablebox{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;}
+table{border-collapse:collapse;width:100%;font-size:15px;}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+tr:last-child td{border-bottom:none;}
+.mca{background:var(--paper);border:2px dashed var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:700;}
+.flow span.box{padding:6px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--line);}
+</style>
+<style>
+.hero{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;}
+.big{font-family:var(--display);font-weight:800;font-size:52px;line-height:1;color:var(--green);font-variant-numeric:tabular-nums;}
+.mid{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--teal);font-variant-numeric:tabular-nums;}
+.stat{display:flex;flex-direction:column;gap:6px;}
+.sec{display:flex;flex-direction:column;gap:14px;}
+.sechead{border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:4px;}
+.bitgrid{display:grid;grid-template-columns:repeat(43,1fr);gap:2px;max-width:520px;}
+.bitgrid i{display:block;aspect-ratio:1;border-radius:1px;background:var(--green);}
+.bitgrid i.bad{background:var(--red);outline:2px solid var(--red);outline-offset:1px;}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;}
+.bars{display:flex;flex-direction:column;gap:10px;}
+.bar-row{display:flex;flex-direction:column;gap:4px;}
+.bar-row .top{display:flex;justify-content:space-between;gap:10px;font-size:15px;}
+.track{height:20px;background:var(--bg);border-radius:4px;overflow:hidden;display:flex;}
+.fill{height:100%;min-width:3px;}
+.f-teal{background:var(--teal);} .f-grey{background:var(--grey);} .f-green{background:var(--green);} .f-amber{background:var(--amber);} .f-red{background:var(--red);}
+.num{font-variant-numeric:tabular-nums;font-weight:700;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+.mini{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;}
+.mini h3{font-size:20px;}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.t-new{color:var(--green);} .t-chg{color:var(--amber);} .t-same{color:var(--muted);}
+.files td:first-child{font-family:var(--mono);font-size:14px;white-space:nowrap;}
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="label">Case Study I · Sprint 2 · for the whole team</span>
+  <h1>Sprint 2 Billing Story</h1>
+  <p class="lede">What we found in the data, how we cleaned it, which model methods we tried, and how the winner scored. Every number comes from our notebooks <span class="mono">sprint2-cleaning.ipynb</span> and <span class="mono">sprint2-modeling.ipynb</span>.</p>
+</header>
+
+<div class="hero">
+  <div class="stat"><span class="label">Final score on test (EMR)</span><span class="big">94.46%</span><span>of the 97,100 test bills fully right (all 731 boxes)</span></div>
+  <div class="stat"><span class="label">Winning method</span><span class="mid">The 731 Specialists</span><span class="mono" style="color:var(--teal)">Binary Relevance with decision trees</span></div>
+  <div class="stat"><span class="label">Clean training data</span><span class="mid">62,622 rows</span><span>from 187,442 original rows</span></div>
+</div>
+
+<!-- 1 THE TASK -->
+<section class="sec">
+  <div class="sechead"><span class="label">1 · The task</span><h2>Read the subscription, write the bill</h2></div>
+  <div class="grid2">
+    <div class="mini"><h3>Input and output</h3><p>Each customer has <strong>743 subscription options</strong> (CRM columns, 0/1) and a bill of <strong>731 items</strong> (BIL columns, 0/1). The model reads the options and fills the 731 boxes. This is <strong>multi-label classification</strong>.</p></div>
+    <div class="mini"><h3>The grade: EMR</h3><p>A bill counts only if <strong>all 731 boxes</strong> are right. 730 right and 1 wrong = wrong bill.</p>
+      <div class="bitgrid" id="bits" aria-label="731 boxes, one wrong"></div>
+      <span style="font-size:14px;color:var(--muted)">"Boxes right" always looks high (97–99%) because most boxes are 0. Only EMR decides.</span></div>
+  </div>
+</section>
+
+<!-- 2 FINDINGS -->
+<section class="sec">
+  <div class="sechead"><span class="label">2 · What we found in the data</span><h2>Five facts that shaped our decisions</h2></div>
+  <div class="grid2">
+    <div class="mini"><h3>Wrong bills</h3><p>Some customers with the <strong>same subscription</strong> have <strong>different bills</strong>: the provisioning errors the professor mentioned. We fix them with a <strong>vote</strong>.</p></div>
+    <div class="mini"><h3>Broken profiles</h3><p><strong>4,728</strong> train customers have no subscriber type/status, or two. This never happens in test or in the solution, so they are errors.</p></div>
+    <div class="mini"><h3>Many copies</h3><p>Most rows are exact copies of others (popular plans). Removed only <strong>after</strong> the vote, so every customer could vote.</p></div>
+    <div class="mini"><h3>Rare items</h3><p>Most billing items are active for less than 1% of customers. That's why "boxes right" always looks high and why EMR is hard.</p></div>
+    <div class="mini"><h3>Test is new</h3><p>Only <strong>5</strong> of 97,100 test subscriptions appear in train, and only 3.5% of test bills. The model must <strong>build</strong> bills from rules, not copy them.</p></div>
+    <div class="mini"><h3>2 useless columns</h3><p><span class="mono">CRM_2396_PACK</span> and <span class="mono">CRM_2398_PACK</span> are always 0 in train. Removed from train <strong>and</strong> test.</p></div>
+  </div>
+</section>
+
+<!-- 3 CLEANING -->
+<section class="sec">
+  <div class="sechead"><span class="label">3 · Cleaning (sprint2-cleaning.ipynb)</span><h2>From 187,442 rows to 62,622</h2></div>
+  <div class="panel">
+    <div class="bars">
+      <div class="bar-row"><div class="top"><span><span class="tag t-same">Sprint 1</span> Original train</span><span class="num">187,442</span></div><div class="track"><div class="fill f-grey" style="width:100%"></div></div></div>
+      <div class="bar-row"><div class="top"><span><span class="tag t-new">New</span> Remove broken profiles (−4,728)</span><span class="num">182,714</span></div><div class="track"><div class="fill f-teal" style="width:97.5%"></div></div></div>
+      <div class="bar-row"><div class="top"><span><span class="tag t-new">New</span> Vote: keep the most common bill; drop ties (−1,419)</span><span class="num">181,295</span></div><div class="track"><div class="fill f-teal" style="width:96.7%"></div></div></div>
+      <div class="bar-row"><div class="top"><span><span class="tag t-chg">Moved</span> Remove copies, after the vote (−118,673)</span><span class="num">62,622</span></div><div class="track"><div class="fill f-green" style="width:33.4%"></div></div></div>
+    </div>
+    <p style="font-size:15px;color:var(--muted)">Vote details: 609 subscriptions had different bills; 94 of them were ties (e.g. 1 customer vs 1 customer), so we couldn't know the right bill and removed them. Missing values: 0. Output file: <span class="mono">train_clean.zip</span>.</p>
+  </div>
+</section>
+
+<!-- 4 METHODS -->
+<section class="sec">
+  <div class="sechead"><span class="label">4 · Modeling (sprint2-modeling.ipynb)</span><h2>Five ways to write a bill</h2></div>
+  <div class="tablebox"><table>
+    <tr><th>Nickname</th><th>Real name</th><th>Idea</th><th>Result</th></tr>
+    <tr><td><strong>The Lazy One</strong></td><td class="mono">Majority baseline</td><td>Same bill (the most common) for everyone. The score to beat.</td><td>0.02%</td></tr>
+    <tr><td><strong>The Copier</strong></td><td class="mono">k-Nearest Neighbors</td><td>Copies the bill of the most similar customer.</td><td>0.22%</td></tr>
+    <tr><td><strong>The 731 Specialists</strong></td><td class="mono">Binary Relevance (decision trees)</td><td>One small yes/no tree per bill item.</td><td><strong>71.45%</strong></td></tr>
+    <tr><td><strong>The Rule Tree</strong></td><td class="mono">Decision Tree (multi-output)</td><td>One tree fills all 731 items at once.</td><td>0.25%</td></tr>
+    <tr><td><strong>The Fixed Menu</strong></td><td class="mono">Label Powerset</td><td>Picks a bill it has already seen.</td><td>Ruled out</td></tr>
+  </table></div>
+  <div class="panel">
+    <span class="label">Quick test · EMR on the 20% validation (models trained on a 10,000-row sample)</span>
+    <div class="bars">
+      <div class="bar-row"><div class="top"><span>B · The 731 Specialists</span><span class="num">71.45%</span></div><div class="track"><div class="fill f-green" style="width:71.45%"></div></div></div>
+      <div class="bar-row"><div class="top"><span>C · The Rule Tree</span><span class="num">0.25%</span></div><div class="track"><div class="fill f-red" style="width:0.25%"></div></div></div>
+      <div class="bar-row"><div class="top"><span>A · The Copier</span><span class="num">0.22%</span></div><div class="track"><div class="fill f-red" style="width:0.22%"></div></div></div>
+      <div class="bar-row"><div class="top"><span>Baseline · The Lazy One</span><span class="num">0.02%</span></div><div class="track"><div class="fill f-grey" style="width:0.02%"></div></div></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="mini"><h3>Why B wins</h3><p>Each item gets its own simple rule ("if the customer has option X, bill item Y"). That works for subscriptions the model has never seen.</p></div>
+    <div class="mini"><h3>Why the others fail</h3><p><strong>The Copier</strong> copies the neighbor's small differences. <strong>The Rule Tree</strong> mixes all 731 items in one set of rules and can't specialize. A multi-output <strong>Random Forest</strong> ran out of memory.</p></div>
+  </div>
+</section>
+
+<!-- 5 RESULTS -->
+<section class="sec">
+  <div class="sechead"><span class="label">5 · Results of the winner</span><h2>Practice exam and final exam</h2></div>
+  <div class="panel">
+    <div class="bars">
+      <div class="bar-row"><div class="top"><span>Practice exam · 20% validation (trained on 80%)</span><span class="num">73.27%</span></div><div class="track"><div class="fill f-teal" style="width:73.27%"></div></div></div>
+      <div class="bar-row"><div class="top"><span>Final exam · test.csv vs solution.csv (trained on 100%)</span><span class="num">94.46%</span></div><div class="track"><div class="fill f-green" style="width:94.46%"></div></div></div>
+    </div>
+    <p style="font-size:15px">Why is the final score higher? Most likely because the test set only contains <strong>correct</strong> bills (professor's note), while our validation comes from train, which still has some errors. The final model also learned from 100% of the data instead of 80%.</p>
+    <p style="font-size:15px;color:var(--muted)">Predictions saved as <span class="mono">predictions.zip</span> (same format as solution.csv).</p>
+  </div>
+</section>
+
+<!-- 6 NEXT -->
+<section class="sec">
+  <div class="sechead"><span class="label">6 · Next steps</span><h2>What the team does now</h2></div>
+  <div class="grid2">
+    <div class="mini"><h3>MCA (teammate)</h3><p>MCA shrinks the 743 options into fewer columns <em>before</em> the model. Test it in <span class="mono">sprint2-modeling.ipynb</span>, section 7: fit MCA on the training part only, train B on the MCA columns, and compare the EMR on validation with <strong>73.27%</strong>. Keep MCA only if it's equal or better. Risk: it can lose rare options.</p></div>
+    <div class="mini"><h3>Sprint 3 · due 6/10</h3><p><strong>Optimization:</strong> improve the 731 Specialists (e.g. tune the trees).<br><strong>Explainability:</strong> show which options lead to which bill items. Decision trees make this possible.</p></div>
+  </div>
+  <div class="tablebox files"><table>
+    <tr><th>File on GitHub</th><th>What it is</th></tr>
+    <tr><td>sprint2-cleaning.ipynb</td><td>Sprint 1 cells + the new cleaning steps</td></tr>
+    <tr><td>train_clean.zip</td><td>Clean training data (62,622 rows)</td></tr>
+    <tr><td>sprint2-modeling.ipynb</td><td>The 4 methods, the comparison and the final test</td></tr>
+    <tr><td>predictions.zip</td><td>Our predicted bills for the test set</td></tr>
+    <tr><td>sprint2-summary.html</td><td>This page (open it in a web browser)</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">Not on GitHub (too big): train.csv, test.csv, solution.csv, cleaned_telecom_data.csv. Each teammate keeps them in their own folder.</p>
+</section>
+
+</div>
+<script>
+(function(){var g=document.getElementById('bits');var h='';for(var i=0;i<731;i++){h+=(i===412)?'<i class="bad"></i>':'<i></i>';}g.innerHTML=h;})();
+</script>
+</body></html>

@@ -1,0 +1,271 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0}</style></head><body>
+<title>Five Ways to Write a Bill</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F3F6F7; --paper:#FFFFFF; --ink:#132B35; --muted:#566A73; --line:#D5E0E3;
+  --teal:#0B7A83; --teal-soft:#D8EEF0; --amber:#B86B00; --amber-soft:#FBEBD2;
+  --red:#C23B32; --red-soft:#F8DEDB; --green:#2B7D4B; --green-soft:#DAF0E2;
+  --grey:#8FA1A8; --chip-off:#E7EDEF;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1A1F; --paper:#16252C; --ink:#E4EEF0; --muted:#9DB2BA; --line:#2A3D45;
+    --teal:#4CC3CC; --teal-soft:#16393E; --amber:#F2A93B; --amber-soft:#3A2B12;
+    --red:#F07A70; --red-soft:#3E1D1A; --green:#6CCB8F; --green-soft:#173524; --grey:#6E848C; --chip-off:#22343B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1A1F; --paper:#16252C; --ink:#E4EEF0; --muted:#9DB2BA; --line:#2A3D45;
+  --teal:#4CC3CC; --teal-soft:#16393E; --amber:#F2A93B; --amber-soft:#3A2B12;
+  --red:#F07A70; --red-soft:#3E1D1A; --green:#6CCB8F; --green-soft:#173524; --grey:#6E848C; --chip-off:#22343B;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:32px 64px;display:flex;flex-direction:column;gap:28px;}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance;}
+h1{font-size:clamp(30px,5vw,44px);font-weight:800;}
+h2{font-size:24px;font-weight:800;}
+h3{font-size:26px;font-weight:800;}
+p{margin:0;max-width:65ch;}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted);}
+.lede{color:var(--muted);font-size:17px;}
+.mono{font-family:var(--mono);font-size:14px;}
+
+/* tiny world */
+.world{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.world .col{display:flex;flex-direction:column;gap:10px;}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:14px;font-weight:700;border:1.5px solid transparent;}
+.chip.opt{background:var(--teal-soft);color:var(--teal);}
+.chip.opt.off{background:var(--chip-off);color:var(--grey);text-decoration:line-through;}
+.chip.item{background:var(--amber-soft);color:var(--amber);}
+.chip.item.off{background:var(--chip-off);color:var(--grey);}
+.chip.ok{background:var(--green-soft);color:var(--green);border-color:var(--green);}
+.chip.bad{background:var(--red-soft);color:var(--red);border-color:var(--red);}
+.chip.miss{background:transparent;color:var(--red);border:1.5px dashed var(--red);}
+.arrow{color:var(--muted);font-weight:700;}
+.ana{display:flex;flex-direction:column;gap:8px;background:var(--bg);border-radius:10px;padding:12px;}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:120px minmax(0,1fr);gap:22px;}
+@media (max-width:680px){.card{grid-template-columns:1fr;}}
+.badge{width:110px;height:110px;border-radius:22px;display:flex;align-items:center;justify-content:center;}
+.badge svg{width:76px;height:76px;}
+.b-grey{background:var(--chip-off);} .b-teal{background:var(--teal-soft);} .b-amber{background:var(--amber-soft);} .b-green{background:var(--green-soft);} .b-red{background:var(--red-soft);}
+.body{display:flex;flex-direction:column;gap:12px;}
+.names{display:flex;flex-direction:column;gap:2px;}
+.real{font-family:var(--mono);font-size:14px;color:var(--teal);}
+.idea{font-size:18px;}
+.demo{border-left:3px solid var(--line);padding-left:14px;display:flex;flex-direction:column;gap:6px;}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media (max-width:520px){.proscons{grid-template-columns:1fr;}}
+.pc{border-radius:10px;padding:10px 12px;font-size:15px;}
+.pc.good{background:var(--green-soft);} .pc.bad{background:var(--red-soft);}
+.pc b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
+.pc.good b{color:var(--green);} .pc.bad b{color:var(--red);}
+.status{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:15px;}
+.pill{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;}
+.pill.tested{background:var(--red-soft);color:var(--red);}
+.pill.out{background:var(--red-soft);color:var(--red);}
+.pill.next{background:var(--teal-soft);color:var(--teal);}
+.pill.ref{background:var(--chip-off);color:var(--muted);}
+.say{font-style:italic;color:var(--muted);font-size:15px;}
+
+/* cheat sheet */
+.tablebox{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;}
+table{border-collapse:collapse;width:100%;font-size:15px;}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+tr:last-child td{border-bottom:none;}
+.mca{background:var(--paper);border:2px dashed var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:700;}
+.flow span.box{padding:6px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--line);}
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="label">Case Study I · Sprint 2 · model methods explained</span>
+  <h1>Five Ways to Write a Bill</h1>
+  <p class="lede">Every model has one job: look at a customer's subscription and write their bill. Here are the ways to do it, each with a nickname to remember it, the real name you'll hear in class, and one tiny example.</p>
+</header>
+
+<!-- TINY WORLD -->
+<section style="display:flex;flex-direction:column;gap:12px">
+  <span class="label">The tiny example used on every card</span>
+  <div class="world">
+    <div class="col">
+      <h2 style="font-size:20px">A tiny telecom</h2>
+      <p>Only 3 options and 3 bill items (the real one has 743 and 731).</p>
+      <div class="row"><span class="chip opt">TV</span><span class="arrow">→</span><span class="chip item">TV fee</span></div>
+      <div class="row"><span class="chip opt">Internet</span><span class="arrow">→</span><span class="chip item">Internet fee</span></div>
+      <div class="row"><span class="chip opt">Mobile</span><span class="arrow">→</span><span class="chip item">Mobile fee</span></div>
+    </div>
+    <div class="col">
+      <h2 style="font-size:20px">What the model has seen (train)</h2>
+      <div class="row"><span class="chip opt">TV</span><span class="arrow">→</span><span class="chip item">TV fee</span><span class="mono" style="color:var(--muted)">× 50 customers</span></div>
+      <div class="row"><span class="chip opt">Internet</span><span class="arrow">→</span><span class="chip item">Internet fee</span><span class="mono" style="color:var(--muted)">× 30</span></div>
+      <div class="row"><span class="chip opt">TV</span><span class="chip opt">Internet</span><span class="arrow">→</span><span class="chip item">TV fee</span><span class="chip item">Internet fee</span><span class="mono" style="color:var(--muted)">× 20</span></div>
+    </div>
+    <div class="col">
+      <h2 style="font-size:20px">New customer: Ana</h2>
+      <div class="ana">
+        <span class="label">Her subscription (never seen before)</span>
+        <div class="row"><span class="chip opt">Internet</span><span class="chip opt">Mobile</span></div>
+        <span class="label">Correct bill</span>
+        <div class="row"><span class="chip item">Internet fee</span><span class="chip item">Mobile fee</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BASELINE -->
+<article class="card">
+  <div class="badge b-grey" aria-hidden="true">
+    <svg viewBox="0 0 76 76"><rect x="10" y="14" width="56" height="48" rx="6" fill="none" stroke="var(--grey)" stroke-width="4"/><path d="M22 30h32M22 40h32M22 50h20" stroke="var(--grey)" stroke-width="4" stroke-linecap="round"/><path d="M52 6l6 8M24 6l-6 8" stroke="var(--grey)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="body">
+    <div class="names"><span class="label">Baseline</span><h3>The Lazy One</h3><span class="real">Real name: majority baseline ("most frequent")</span></div>
+    <p class="idea">Gives <strong>everyone the same bill</strong>: the most common one. It doesn't look at the customer at all.</p>
+    <div class="demo">
+      <span class="label">Ana's bill</span>
+      <div class="row"><span class="chip bad">TV fee ✗</span><span class="chip miss">Internet fee missing</span><span class="chip miss">Mobile fee missing</span></div>
+      <span>Wrong. It gave her the most common bill ("TV fee").</span>
+    </div>
+    <div class="proscons">
+      <div class="pc good"><b>Why use it</b>It's the <strong>minimum score</strong>. Any real model must beat it.</div>
+      <div class="pc bad"><b>Weakness</b>Learns nothing. It's a ruler, not a solution.</div>
+    </div>
+    <div class="status"><span class="pill ref">Reference</span>Our first measurement in the notebook.</div>
+    <p class="say">Say it like this: "Our baseline gets X% EMR. Model C gets Y%, so it really learned something."</p>
+  </div>
+</article>
+
+<!-- A kNN -->
+<article class="card">
+  <div class="badge b-teal" aria-hidden="true">
+    <svg viewBox="0 0 76 76"><rect x="6" y="18" width="28" height="40" rx="4" fill="none" stroke="var(--teal)" stroke-width="4"/><rect x="42" y="18" width="28" height="40" rx="4" fill="none" stroke="var(--teal)" stroke-width="4"/><path d="M12 30h16M12 40h16M48 30h16M48 40h16" stroke="var(--teal)" stroke-width="3.5" stroke-linecap="round"/><path d="M30 10c6-6 12-6 16 0" fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-linecap="round"/><path d="M44 6l2 4-4 1" fill="none" stroke="var(--teal)" stroke-width="3.5" stroke-linecap="round"/></svg>
+  </div>
+  <div class="body">
+    <div class="names"><span class="label">Method A</span><h3>The Copier</h3><span class="real">Real name: k-Nearest Neighbors (kNN)</span></div>
+    <p class="idea">Finds the <strong>most similar customer</strong> it has seen and <strong>copies their whole bill</strong>.</p>
+    <div class="demo">
+      <span class="label">Ana's bill</span>
+      <span>Most similar customer: <span class="chip opt">Internet</span> (only 1 option different). Copies that bill:</span>
+      <div class="row"><span class="chip ok">Internet fee ✓</span><span class="chip miss">Mobile fee missing</span></div>
+      <span>Wrong. The neighbor didn't have Mobile, so the copy doesn't either.</span>
+    </div>
+    <div class="proscons">
+      <div class="pc good"><b>Good</b>Very simple. Always copies a real, complete bill.</div>
+      <div class="pc bad"><b>Bad</b>The small difference with the neighbor becomes an error on the bill.</div>
+    </div>
+    <div class="status"><span class="pill tested">Tested: EMR 0.6%</span>On our validation data, about 6 of every 1,000 bills fully right.</div>
+    <p class="say">Say it like this: "kNN fails here because test customers are new combinations; copying the neighbor copies its differences."</p>
+  </div>
+</article>
+
+<!-- B Binary relevance -->
+<article class="card">
+  <div class="badge b-amber" aria-hidden="true">
+    <svg viewBox="0 0 76 76"><circle cx="16" cy="24" r="8" fill="none" stroke="var(--amber)" stroke-width="4"/><circle cx="38" cy="24" r="8" fill="none" stroke="var(--amber)" stroke-width="4"/><circle cx="60" cy="24" r="8" fill="none" stroke="var(--amber)" stroke-width="4"/><path d="M6 50c0-8 20-8 20 0M28 50c0-8 20-8 20 0M50 50c0-8 20-8 20 0" fill="none" stroke="var(--amber)" stroke-width="4" stroke-linecap="round"/><path d="M10 64h56" stroke="var(--amber)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 8"/></svg>
+  </div>
+  <div class="body">
+    <div class="names"><span class="label">Method B</span><h3>The 731 Specialists</h3><span class="real">Real name: Binary Relevance (one classifier per label)</span></div>
+    <p class="idea">One <strong>small expert per bill item</strong>. Each one only answers: "does this customer pay <em>my</em> item, yes or no?"</p>
+    <div class="demo">
+      <span class="label">Ana's bill</span>
+      <div class="row"><span class="mono">TV expert:</span><span class="chip item off">no TV → no</span></div>
+      <div class="row"><span class="mono">Internet expert:</span><span class="chip ok">Internet fee ✓</span></div>
+      <div class="row"><span class="mono">Mobile expert:</span><span class="chip ok">Mobile fee ✓</span></div>
+      <span>Right, if each expert learned its rule well.</span>
+    </div>
+    <div class="proscons">
+      <div class="pc good"><b>Good</b>Each item learns its own rule, so it works for new combinations.</div>
+      <div class="pc bad"><b>Bad</b>731 separate models (slow). They don't talk to each other, so together they can write an impossible bill.</div>
+    </div>
+    <div class="status"><span class="pill next">To test</span>In the notebook, first on a small sample.</div>
+    <p class="say">Say it like this: "Binary Relevance trains one yes/no model per billing column."</p>
+  </div>
+</article>
+
+<!-- C Tree / Forest -->
+<article class="card">
+  <div class="badge b-green" aria-hidden="true">
+    <svg viewBox="0 0 76 76"><circle cx="38" cy="12" r="7" fill="none" stroke="var(--green)" stroke-width="4"/><circle cx="18" cy="40" r="7" fill="none" stroke="var(--green)" stroke-width="4"/><circle cx="58" cy="40" r="7" fill="none" stroke="var(--green)" stroke-width="4"/><circle cx="8" cy="66" r="5" fill="var(--green)"/><circle cx="28" cy="66" r="5" fill="var(--green)"/><circle cx="48" cy="66" r="5" fill="var(--green)"/><circle cx="68" cy="66" r="5" fill="var(--green)"/><path d="M33 17L22 34M43 17l11 17M15 46l-5 15M21 46l5 15M55 46l-5 15M61 46l5 15" stroke="var(--green)" stroke-width="3.5" stroke-linecap="round"/></svg>
+  </div>
+  <div class="body">
+    <div class="names"><span class="label">Method C</span><h3>The Rule Tree (and the Forest)</h3><span class="real">Real names: Decision Tree (multi-output) · Random Forest</span></div>
+    <p class="idea">One expert that learns <strong>if → then rules</strong> and fills <strong>all the boxes at once</strong>. A <strong>Random Forest</strong> is many trees that <strong>vote</strong>.</p>
+    <div class="demo">
+      <span class="label">Ana's bill</span>
+      <span class="mono">Has TV? no → no TV fee</span>
+      <span class="mono">Has Internet? yes → Internet fee</span>
+      <span class="mono">Has Mobile? yes → Mobile fee</span>
+      <div class="row"><span class="chip ok">Internet fee ✓</span><span class="chip ok">Mobile fee ✓</span></div>
+      <span>Right, because it learned the rules, not whole bills.</span>
+    </div>
+    <div class="proscons">
+      <div class="pc good"><b>Good</b>Works for new combinations. Easy to explain ("if X then Y"), which helps in Sprint 3. One line in scikit-learn.</div>
+      <div class="pc bad"><b>Bad</b>With 731 items it can be slow. One tree can memorize too much; the forest reduces that, but is slower.</div>
+    </div>
+    <div class="status"><span class="pill next">To test</span>In the notebook, first on a small sample.</div>
+    <p class="say">Say it like this: "A multi-output tree predicts all 731 columns with one set of rules. A Random Forest averages many trees."</p>
+  </div>
+</article>
+
+<!-- D Label Powerset -->
+<article class="card">
+  <div class="badge b-red" aria-hidden="true">
+    <svg viewBox="0 0 76 76"><rect x="14" y="8" width="48" height="60" rx="6" fill="none" stroke="var(--red)" stroke-width="4"/><path d="M24 22h28M24 34h28M24 46h18" stroke="var(--red)" stroke-width="4" stroke-linecap="round"/><path d="M48 50l12 12M60 50L48 62" stroke="var(--red)" stroke-width="4" stroke-linecap="round"/></svg>
+  </div>
+  <div class="body">
+    <div class="names"><span class="label">Method D</span><h3>The Fixed Menu</h3><span class="real">Real name: Label Powerset</span></div>
+    <p class="idea">Treats each <strong>complete bill as one dish on a menu</strong> and picks one. It can only serve bills it has seen before.</p>
+    <div class="demo">
+      <span class="label">Ana's bill</span>
+      <span>Menu: <span class="chip item">TV fee</span> · <span class="chip item">Internet fee</span> · <span class="chip item">TV fee + Internet fee</span></span>
+      <div class="row"><span class="chip miss">"Internet fee + Mobile fee" is not on the menu</span></div>
+      <span>Wrong. Her bill was never seen, so it can't be chosen.</span>
+    </div>
+    <div class="proscons">
+      <div class="pc good"><b>Good</b>Always gives a real, coherent bill.</div>
+      <div class="pc bad"><b>Bad</b>Can't create new bills.</div>
+    </div>
+    <div class="status"><span class="pill out">Ruled out</span>Only 3.5% of the test bills exist in train, so it would fail on 96.5%.</div>
+    <p class="say">Say it like this: "Label Powerset is ruled out: almost none of the test bills appear in train."</p>
+  </div>
+</article>
+
+<!-- MCA -->
+<section class="mca">
+  <span class="label">Not a method, a step before the method</span>
+  <h2>MCA: The Summarizer</h2>
+  <p><strong>Real name:</strong> Multiple Correspondence Analysis. It doesn't write bills. It <strong>shrinks the 743 options</strong> into fewer "summary" columns, and <em>then</em> a method (A, B or C) uses those.</p>
+  <div class="flow"><span class="box">743 options</span><span class="arrow">→</span><span class="box">MCA (summarize)</span><span class="arrow">→</span><span class="box">e.g. 50 columns</span><span class="arrow">→</span><span class="box">Method B or C</span><span class="arrow">→</span><span class="box">bill</span></div>
+  <p class="say">Risk: a summary keeps the big patterns and can lose rare options, and many bill items are rare. That's why we test with and without MCA.</p>
+</section>
+
+<!-- CHEAT SHEET -->
+<section style="display:flex;flex-direction:column;gap:12px">
+  <span class="label">Cheat sheet</span>
+  <h2>Remember it in one line</h2>
+  <div class="tablebox"><table>
+    <tr><th>Nickname</th><th>Real name</th><th>One line</th><th>Status</th></tr>
+    <tr><td><strong>The Lazy One</strong></td><td class="mono">Majority baseline</td><td>Same bill for everyone. The score to beat.</td><td>Reference</td></tr>
+    <tr><td><strong>The Copier</strong></td><td class="mono">k-Nearest Neighbors</td><td>Copies the bill of the most similar customer.</td><td>Tested: 0.6%</td></tr>
+    <tr><td><strong>The 731 Specialists</strong></td><td class="mono">Binary Relevance</td><td>One yes/no expert per bill item.</td><td>To test</td></tr>
+    <tr><td><strong>The Rule Tree / Forest</strong></td><td class="mono">Decision Tree · Random Forest</td><td>If → then rules for all items at once; the forest votes.</td><td>To test</td></tr>
+    <tr><td><strong>The Fixed Menu</strong></td><td class="mono">Label Powerset</td><td>Picks a bill it has already seen.</td><td>Ruled out</td></tr>
+    <tr><td><strong>The Summarizer</strong></td><td class="mono">MCA</td><td>Shrinks the options before the model. Not a model.</td><td>Teammate tests it</td></tr>
+  </table></div>
+  <p style="color:var(--muted);font-size:15px">How we pick the winner: the highest <strong>EMR</strong> (% of customers with all 731 boxes right) on the 20% validation data, and it must beat The Lazy One.</p>
+</section>
+
+</div>
+</body></html>
