@@ -1,73 +1,158 @@
-Case Study I
-The project will be carried out in teams of 5 or 6 students.
+# Case Study I - Telecom Billing Configuration
 
-Each team must appoint a team leader.
+## Project Overview
 
-The team leader will be responsible for defining the project activities and assigning team members to each task within Microsoft Planner.
+This project challenges teams to predict the correct billing configuration for a telecommunications customer from the services recorded in the CRM system.
 
-The project has a duration of 3 weeks, structured into three distinct sprints:
+The project is completed by teams of **5 or 6 students**. Each team must appoint a **team leader**. The team leader is responsible for defining the project activities and assigning team members to tasks in Microsoft Planner.
 
-Sprint 1: Pre-processing
+The project lasts **3 weeks** and is divided into three sprints:
 
-Sprint 2: Modeling
+1. **Sprint 1 - Pre-processing**
+2. **Sprint 2 - Modeling**
+3. **Sprint 3 - Optimization and Explainability**
 
-Sprint 3: Optimization and Explainability
+Each team must present its completed activities and results at the end of every week. The notebook for each sprint must be submitted through Moodle.
 
-The final grade for the project will be calculated based on the following weights for each sprint:
+## Schedule and Grading
 
-Sprint 1: 40% - Submission date: 22/09/2026 23:59
+| Sprint | Topic | Weight | Submission deadline |
+|---|---|---:|---|
+| 1 | Pre-processing | 40% | 22/09/2026 at 23:59 |
+| 2 | Modeling | 30% | 29/09/2026 at 23:59 |
+| 3 | Optimization and Explainability | 30% | 06/10/2026 at 23:59 |
 
-Sprint 2: 30% - Submission date: 29/09/2026 23:59
+The final grade is calculated as:
 
-Sprint 3: 30% - Submission date: 6/10/2026 23:59
+$$
+\text{Final grade} = 0.40S_1 + 0.30S_2 + 0.30S_3
+$$
 
-At the end of each week, all teams are required to present the activities they have completed and the results obtained during that sprint.
+## Problem Definition
 
-The notebook corresponding to each sprint must be submitted on Moodle.
+Telecommunications operators must provision the services subscribed to by each customer and bill those services correctly. A 4-Play subscription can involve Internet, television, mobile phone, and fixed-line services, with information distributed across several systems:
 
- Problem Definition
-Have you ever been charged for something you did not subscribe to? How hard could it be to get my invoice right?
+- **CRM:** master record of the offers and services subscribed to by the customer.
+- **TV platform:** determines the television channels available to the customer.
+- **Internet platform:** determines the customer's Internet speed.
+- **Billing system:** determines how services and usage are billed.
 
-One of the most important processes for telecommunications operators is service provisioning to a customer. This is the process responsible to provide you with the services you contracted and to charge you for them.
+Because these systems contain many options and possible combinations, provisioning errors can occur through human or automated processes. The objective of this competition is to learn the relationship between CRM and Billing configurations and predict the correct Billing configuration for each customer.
 
-A simple 4 Play subscription - Internet, TV, mobile phone and fixed line - involves configuring multiple systems: 
+The relationship is not necessarily one-to-one: multiple CRM configurations may correspond to the same Billing configuration, and the training data may contain inconsistent CRM-Billing pairs.
 
-CRM- Customer Relationship Management - the master system that keeps the information about the offers that the customer subscribed to; 
-TV platform - defines the channels that the customer can watch;
-Internet platform - defines the internet speed;
-Billing system - responsible for billing the services and the usage that the customer makes of them. 
-It is a complex process as there are hundreds of options, thousands of possible combinations and millions of customers. It is subject to errors, both human and automatic. For this reason, operators have different "audit" processes that try to ensure that all intervening systems are consistent with each other.
+## Dataset Description
 
-In this competition, we challenge you to predict the right bill for a customer given the services he contracted. The goal is to build a model that receives the configuration of the CRM system and predicts the correct configuration of the Billing system.
+All configuration fields have been pre-processed into binary variables:
 
-As mentioned, CRM is normally the master of the information of the services that the customer has subscribed to, so it will be possible to infer which configuration to expect in the Billing system. Note, however, that the configurations between these two systems may not be one to one, in many cases there are many to one configurations, that is, two different CRM configurations may point to the same Billing configuration. 
+- `0` means that an option is inactive.
+- `1` means that an option is active.
 
-Characteristics of the problem
-The dataset contains several provisioning errors, i.e. in the dataset it may happen that for a CRM configuration there are different configurations in Billing;
-The dimension of the output 731 is very large;
-Different CRM configurations can correspond to only one Billing configuration;
-The individual variables of the CRM configuration may not have a direct correspondence to the individual variables of the Billing configuration; 
+### Training data
 
-Evaluation
+The training data contains one row per customer and includes:
 
-Submissions are evaluated according to the Exact Matching Ratio (EMR): the percentage of samples that have all their labels classified correctly. 
+- 1 customer identifier column: `MSISDN`.
+- 745 CRM input columns, whose names start with `CRM`.
+- 731 Billing target columns, whose names start with `BIL`.
 
-𝐸𝑀𝑅=1𝑛∑𝑖=1𝑛𝐼(𝑌𝑖=𝑍𝑖)
-Where (I) is the indicator function, (n) is the number of samples, (k) the size of the labelset, (Y_i \in \{0,1\}^k) represents a label and (Z_i \in \{0,1\}^k) represents a prediction.
-Only samples where all labels are correct will be considered as correct. In order to have a perfect score of (EMR = 1) all the labels for all samples need to correct.
+The model receives the CRM configuration and must predict all 731 Billing labels.
 
+### Test data
 
-Dataset Description
-The configurations in both systems have been pre-processed in order to obtain only binary variables. This way, each column corresponds to an option in the configuration of the respective system (CRM / BILLING), the value 0 indicates that the option is inactive and the value 1 indicates that it is active. The training dataset contains one line for each client and given the set of CRM system settings, the objective is to return the Billing system configuration. The training dataset contains errors in the configuration of CRM/BILLING, however when testing only pairs of CRM-BILLING configurations that we deem as correct will be used.
+The test data contains:
 
-File descriptions
-train.csv - the training set
-test.csv - the test set
-sampleSubmission.csv - a sample submission file in the correct format
-Data fields
-The training dataset is structured as follows: 1 column to identify the customer, 745 columns for the CRM configuration and 731 for the BILLING configuration.
+- 1 encrypted customer identifier column: `MSISDN`.
+- 745 CRM input columns.
 
-MSISDN - customer's identifier, this field is encrypted;
-Columns that start with 'CRM' (2nd – 746th (inclusive)) - these correspond to the input configuration (CRM);
-Columns that start with 'BIL' (747th – 1477th (inclusive)) - these correspond to the output configuration (BILLING);
-The test dataset is structured as follows: 1 column to identify the customer and 745 columns for the CRM configuration.
+Billing labels are not provided for the test data. The predicted labels must be written in the required submission format.
+
+### Files in this workspace
+
+- `train.csv`: labeled training data.
+- `test.csv`: test CRM configurations.
+- `solution.csv`: available solution/submission reference file.
+- `cleaned_telecom_data.csv`: cleaned data generated during Sprint 1.
+- `first_sprint.ipynb`: Sprint 1 preprocessing notebook.
+
+## Characteristics and Challenges
+
+- The dataset contains provisioning errors, so the same CRM configuration may appear with different Billing configurations.
+- The output space is high-dimensional, with 731 binary target variables.
+- Several CRM configurations may map to the same Billing configuration.
+- Individual CRM variables may not have a direct one-to-one correspondence with individual Billing variables.
+- Exact prediction of the complete Billing vector is required for a sample to count as correct.
+
+## Evaluation Metric
+
+Submissions are evaluated with the **Exact Matching Ratio (EMR)**:
+
+$$
+\mathrm{EMR} = \frac{1}{n}\sum_{i=1}^{n} I(Y_i = Z_i)
+$$
+
+where:
+
+- $n$ is the number of samples.
+- $Y_i \in \{0,1\}^{k}$ is the true Billing label vector.
+- $Z_i \in \{0,1\}^{k}$ is the predicted Billing label vector.
+- $k = 731$ is the number of Billing labels.
+- $I(Y_i = Z_i)$ equals 1 only when every Billing label for sample $i$ is correct, and 0 otherwise.
+
+A perfect score, `EMR = 1`, requires every one of the 731 labels to be correct for every sample.
+
+## Sprint Requirements
+
+### Sprint 1 - Pre-processing
+
+- Inspect the structure and quality of the training and test data.
+- Identify the customer ID, CRM input columns, and Billing target columns.
+- Verify binary values, missing values, duplicate IDs, and schema consistency.
+- Detect CRM configurations associated with conflicting Billing configurations.
+- Define and document a reproducible strategy for resolving inconsistent training examples.
+- Remove or justify constant features where appropriate.
+- Export the cleaned dataset and document assumptions and limitations.
+
+### Sprint 2 - Modeling
+
+- Build a reproducible baseline model.
+- Use a validation strategy suitable for high-dimensional multi-label prediction.
+- Evaluate models using EMR and, where useful, supporting metrics.
+- Compare at least two modeling approaches or meaningful baseline variations.
+- Prevent data leakage during preprocessing and validation.
+- Generate a valid prediction file with the required customer identifier and Billing columns.
+
+### Sprint 3 - Optimization and Explainability
+
+- Improve the selected model or prediction pipeline.
+- Compare every improvement against the frozen Sprint 2 baseline.
+- Investigate errors, especially incorrect complete Billing vectors.
+- Explain the most important input features and model decisions where possible.
+- Document limitations, trade-offs, and reproducibility instructions.
+- Produce the final prediction file and final project conclusions.
+
+## Expected Deliverables
+
+For each sprint, submit the corresponding notebook on Moodle and present the completed work and results to the class. Each notebook should include:
+
+- The objective and scope of the sprint.
+- The methodology and important implementation decisions.
+- Reproducible code and relevant outputs.
+- Evaluation results and interpretation.
+- Limitations, assumptions, and next steps.
+
+The final project should provide a reproducible pipeline from CRM input data to predicted Billing configuration.
+
+## Team Organization
+
+The team leader should create and maintain the project plan in Microsoft Planner. Suggested activities include:
+
+- Data inspection and quality checks.
+- Preprocessing and conflict analysis.
+- Baseline modeling.
+- Model comparison and validation.
+- Optimization and error analysis.
+- Explainability and documentation.
+- Notebook integration, submission preparation, and presentation.
+
+All team members should have clearly assigned responsibilities and contribute evidence of their work to the relevant sprint notebook.
